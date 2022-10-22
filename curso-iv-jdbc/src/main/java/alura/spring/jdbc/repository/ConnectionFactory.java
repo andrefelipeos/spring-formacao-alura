@@ -1,4 +1,4 @@
-package alura.spring.jdbc;
+package alura.spring.jdbc.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
