@@ -28,7 +28,12 @@ public class ProductJDBCDAO implements ProductDAO {
 		List<Product> products = new ArrayList<Product>();
 
 		try (Connection connection = ConnectionFactory.getConnection()) {
-			String selectSQL = "SELECT * FROM products;";
+			String selectSQL = "SELECT products.identifier,"
+					+ " products.name,"
+					+ " products.description,"
+					+ " categories.name AS category"
+					+ " FROM products INNER JOIN categories"
+					+ " ON products.category_identifier = categories.identifier;";
 
 			PreparedStatement ps = connection.prepareStatement(selectSQL);
 			ResultSet rs = ps.executeQuery();
@@ -37,6 +42,7 @@ public class ProductJDBCDAO implements ProductDAO {
 			while (rs.next()) {
 				product = new Product(rs.getString("name"), rs.getString("description"));
 				product.setIdentifier(rs.getInt("identifier"));
+				product.setCategory(rs.getString("category"));
 				products.add(product);
 			}
 		} catch (SQLException e) {
