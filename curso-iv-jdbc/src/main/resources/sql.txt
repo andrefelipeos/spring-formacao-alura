@@ -1,1 +1,6 @@
 CREATE TABLE IF NOT EXISTS products (identifier SERIAL, name VARCHAR(200) NOT NULL, description VARCHAR(1000) NOT NULL, PRIMARY KEY (identifier));
+
+CREATE TABLE IF NOT EXISTS categories (identifier SERIAL, name VARCHAR(100) NOT NULL, PRIMARY KEY (identifier));
+
+ALTER TABLE products ADD COLUMN category_identifier BIGINT UNSIGNED;
+ALTER TABLE products ADD FOREIGN KEY (category_identifier) REFERENCES categories (identifier);
