@@ -5,6 +5,7 @@ public class Product {
 	private int identifier;
 	private String name;
 	private String description;
+	private String category;
 
 	public Product(String name, String description) {
 		super();
@@ -36,8 +37,16 @@ public class Product {
 		this.description = description;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String toString() {
-		return this.name + ": " + this.description;
+		return this.name + ": " + this.description + " : " + this.category;
 	}
 
 }
