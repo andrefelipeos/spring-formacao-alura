@@ -3,7 +3,9 @@ package alura.spring.jdbc.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import alura.spring.jdbc.models.Product;
@@ -15,7 +17,25 @@ public class ProductJDBCDAO implements ProductDAO {
 	}
 
 	public List<Product> findAll() {
-		return null;
+		List<Product> products = new ArrayList<Product>();
+
+		try (Connection connection = ConnectionFactory.getConnection()) {
+			String selectSQL = "SELECT * FROM products;";
+
+			PreparedStatement ps = connection.prepareStatement(selectSQL);
+			ResultSet rs = ps.executeQuery();
+
+			Product product = null;
+			while (rs.next()) {
+				product = new Product(rs.getString("name"), rs.getString("description"));
+				product.setIdentifier(rs.getInt("identifier"));
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			throw new DAOException("Could not access the database", e);
+		}
+
+		return products;
 	}
 
 	public void save(Product product) {
