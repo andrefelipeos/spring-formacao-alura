@@ -1,28 +1,21 @@
 package alura.spring.jdbc;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-import alura.spring.jdbc.repository.ConnectionFactory;
+import alura.spring.jdbc.models.Product;
+import alura.spring.jdbc.repository.ProductDAO;
+import alura.spring.jdbc.repository.ProductJDBCDAO;
 
 public class Main {
 
 	public static void main(String[] args) throws SQLException {
-		Connection connection = ConnectionFactory.getConnection();
+		ProductDAO productDAO = new ProductJDBCDAO();
+		List<Product> products = productDAO.findAll();
 
-		String selectSQL = "SELECT * FROM products;";
-		PreparedStatement ps = connection.prepareStatement(selectSQL);
-
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			System.out.println(rs.getInt("identifier")
-					+ " : " + rs.getString("name")
-					+ " : " + rs.getString("description"));
+		for (Product product : products) {
+			System.out.println(product);
 		}
-
-		connection.close();
 	}
 
 }
