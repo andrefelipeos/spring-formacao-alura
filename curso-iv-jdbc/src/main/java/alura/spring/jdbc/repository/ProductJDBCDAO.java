@@ -13,7 +13,15 @@ import alura.spring.jdbc.models.Product;
 public class ProductJDBCDAO implements ProductDAO {
 
 	public void deleteByIdentifier(int identifier) {
+		String deleteSQL = "DELETE FROM products WHERE identifier = ?;";
 
+		try (Connection connection = ConnectionFactory.getConnection()) {
+			PreparedStatement ps = connection.prepareStatement(deleteSQL);
+			ps.setInt(1, identifier);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new DAOException("Could not access the database", e);
+		}
 	}
 
 	public List<Product> findAll() {
