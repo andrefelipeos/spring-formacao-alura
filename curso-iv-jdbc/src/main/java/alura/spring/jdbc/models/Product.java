@@ -36,4 +36,8 @@ public class Product {
 		this.description = description;
 	}
 
+	public String toString() {
+		return this.name + ": " + this.description;
+	}
+
 }
