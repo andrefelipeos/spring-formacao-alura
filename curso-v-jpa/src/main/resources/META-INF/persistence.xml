@@ -4,6 +4,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="3.0">
   <persistence-unit name="postgresql" transaction-type="RESOURCE_LOCAL">
+
+    <class>store.models.Product</class>
+
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
       <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql:alura" />
@@ -12,5 +15,6 @@
 
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
     </properties>
+
   </persistence-unit>
 </persistence>
