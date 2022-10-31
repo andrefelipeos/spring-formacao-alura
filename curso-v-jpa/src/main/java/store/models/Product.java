@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,11 +20,14 @@ public class Product {
 	private String description;
 	private BigDecimal price;
 
-	public Product(String name, String description, BigDecimal price) {
-		super();
+	@ManyToOne
+	private Category category;
+
+	public Product(String name, String description, BigDecimal price, Category category) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.category = category;
 	}
 
 	public Integer getIdentifier() {
@@ -56,6 +60,14 @@ public class Product {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }
