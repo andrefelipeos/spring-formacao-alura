@@ -27,8 +27,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public Product findByIdentifier(int identifier) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Product.class, identifier);
 	}
 
 	@Override
