@@ -27,8 +27,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@Override
 	public Category findByIdentifier(int identifier) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Category.class, identifier);
 	}
 
 	@Override
