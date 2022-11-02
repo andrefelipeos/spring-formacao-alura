@@ -15,6 +15,10 @@ public class Category {
 	private Integer identifier;
 	private String name;
 
+	public Category() {
+		super();
+	}
+
 	public Category(String name) {
 		this.name = name;
 	}
