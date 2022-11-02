@@ -21,8 +21,8 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@Override
 	public List<Category> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("SELECT c FROM Category c", Category.class)
+				.getResultList();
 	}
 
 	@Override
