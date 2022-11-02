@@ -2,6 +2,7 @@ package store.dao;
 
 import java.util.List;
 
+import store.models.Category;
 import store.models.Product;
 
 public interface ProductDao {
@@ -11,6 +12,8 @@ public interface ProductDao {
 	List<Product> findAll();
 
 	Product findByIdentifier(int identifier);
+
+	List<Product> findByCategory(Category category);
 
 	void save(Product product);
 

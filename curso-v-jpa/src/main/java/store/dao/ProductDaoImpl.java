@@ -3,6 +3,7 @@ package store.dao;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
+import store.models.Category;
 import store.models.Product;
 
 public class ProductDaoImpl implements ProductDao {
@@ -28,6 +29,14 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public Product findByIdentifier(int identifier) {
 		return entityManager.find(Product.class, identifier);
+	}
+
+	@Override
+	public List<Product> findByCategory(Category category) {
+		String queryJPQL = "SELECT p FROM Product p WHERE p.category.name = :categoryName";
+		return entityManager.createQuery(queryJPQL, Product.class)
+				.setParameter("categoryName", category.getName())
+				.getResultList();
 	}
 
 	@Override
