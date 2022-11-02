@@ -21,8 +21,8 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("SELECT p FROM Product p", Product.class)
+				.getResultList();
 	}
 
 	@Override
