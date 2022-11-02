@@ -1,5 +1,6 @@
 package store.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
@@ -37,6 +38,14 @@ public class ProductDaoImpl implements ProductDao {
 		return entityManager.createQuery(queryJPQL, Product.class)
 				.setParameter("categoryName", category.getName())
 				.getResultList();
+	}
+
+	@Override
+	public BigDecimal getPriceByIdentifier(int identifier) {
+		return entityManager.createQuery("SELECT p.price FROM Product p WHERE p.identifier = :identifier",
+					BigDecimal.class)
+				.setParameter("identifier", identifier)
+				.getSingleResult();
 	}
 
 	@Override

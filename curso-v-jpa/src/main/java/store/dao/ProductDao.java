@@ -1,5 +1,6 @@
 package store.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import store.models.Category;
@@ -14,6 +15,8 @@ public interface ProductDao {
 	Product findByIdentifier(int identifier);
 
 	List<Product> findByCategory(Category category);
+
+	BigDecimal getPriceByIdentifier(int identifier);
 
 	void save(Product product);
 
