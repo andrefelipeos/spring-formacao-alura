@@ -17,8 +17,9 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public void deleteByIdentifier(int identifier) {
-		// TODO Auto-generated method stub
-
+		entityManager.getTransaction().begin();
+		entityManager.remove(findByIdentifier(identifier));
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
