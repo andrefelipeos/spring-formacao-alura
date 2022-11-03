@@ -6,13 +6,14 @@ import java.util.List;
 import jakarta.persistence.EntityManager;
 import store.models.Category;
 import store.models.Product;
+import store.util.JPAUtil;
 
 public class ProductDaoImpl implements ProductDao {
 
 	private EntityManager entityManager = null;
 
-	public ProductDaoImpl(EntityManager entityManager) {
-		this.entityManager = entityManager;
+	public ProductDaoImpl() {
+		this.entityManager = JPAUtil.getEntityManager();
 	}
 
 	@Override
