@@ -12,6 +12,6 @@ public interface CategoryDao {
 
 	Category findByIdentifier(int identifier);
 
-	void save(Category category);
+	Category save(Category category);
 
 }

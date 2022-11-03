@@ -33,10 +33,11 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public void save(Category category) {
+	public Category save(Category category) {
 		entityManager.getTransaction().begin();
-		this.entityManager.persist(category);
+		category = entityManager.merge(category);
 		entityManager.getTransaction().commit();
+		return category;
 	}
 
 }
