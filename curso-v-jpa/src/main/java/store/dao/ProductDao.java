@@ -18,6 +18,6 @@ public interface ProductDao {
 
 	BigDecimal getPriceByIdentifier(int identifier);
 
-	void save(Product product);
+	Product save(Product product);
 
 }

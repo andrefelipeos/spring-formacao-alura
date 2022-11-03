@@ -49,8 +49,11 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public void save(Product product) {
-		this.entityManager.persist(product);
+	public Product save(Product product) {
+		entityManager.getTransaction().begin();
+		product = entityManager.merge(product);
+		entityManager.getTransaction().commit();
+		return product;
 	}
 
 }
