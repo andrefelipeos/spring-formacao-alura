@@ -4,13 +4,14 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import store.models.Category;
+import store.util.JPAUtil;
 
 public class CategoryDaoImpl implements CategoryDao {
 
 	private EntityManager entityManager = null;
 
-	public CategoryDaoImpl(EntityManager entityManager) {
-		this.entityManager = entityManager;
+	public CategoryDaoImpl() {
+		this.entityManager = JPAUtil.getEntityManager();
 	}
 
 	@Override
@@ -32,7 +33,9 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@Override
 	public void save(Category category) {
+		entityManager.getTransaction().begin();
 		this.entityManager.persist(category);
+		entityManager.getTransaction().commit();
 	}
 
 }
