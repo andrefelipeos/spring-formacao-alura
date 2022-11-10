@@ -2,12 +2,15 @@ package store.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +25,9 @@ public class Order {
 
 	@ManyToOne
 	private Customer costumer;
+
+	@OneToMany(mappedBy = "order")
+	private List<ItemOrder> itens = new ArrayList<ItemOrder>();
 
 	public Order() {
 		super();
