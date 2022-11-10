@@ -29,6 +29,7 @@ public class ItemOrder {
 		this.amount = amount;
 		this.order = order;
 		this.product = product;
+		this.unitPrice = product.getPrice();
 	}
 
 	public Integer getIdentifier() {
