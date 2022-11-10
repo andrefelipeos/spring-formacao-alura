@@ -37,6 +37,11 @@ public class Order {
 		this.costumer = costumer;
 	}
 
+	public void addItem(ItemOrder item) {
+		item.setOrder(this);
+		this.itens.add(item);
+	}
+
 	public Integer getIdentifier() {
 		return identifier;
 	}
