@@ -25,6 +25,10 @@ public class ItemOrder {
 	@ManyToOne
 	private Product product;
 
+	public ItemOrder() {
+		super();
+	}
+
 	public ItemOrder(int amount, Order order, Product product) {
 		this.amount = amount;
 		this.order = order;
