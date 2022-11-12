@@ -28,7 +28,7 @@ public class Order {
 	private Customer costumer;
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<ItemOrder> itens = new ArrayList<ItemOrder>();
+	private List<ItemOrder> items = new ArrayList<ItemOrder>();
 
 	public Order() {
 		super();
@@ -40,7 +40,7 @@ public class Order {
 
 	public void addItem(ItemOrder item) {
 		item.setOrder(this);
-		this.itens.add(item);
+		this.items.add(item);
 	}
 
 	public Integer getIdentifier() {
