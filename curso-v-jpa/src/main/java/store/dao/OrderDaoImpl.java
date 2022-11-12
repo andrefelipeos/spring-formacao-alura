@@ -32,6 +32,13 @@ public class OrderDaoImpl implements OrderDao {
 		return entityManager.find(Order.class, identifier);
 	}
 
+	public List<Object[]> reportOfSales() {
+		String jpqlQuery = "SELECT product.name FROM, SUM(item.amount), MAX(order.date) "
+				+ "FROM Order order JOIN order.items item JOIN item.product product "
+				+ "GROUP BY product.name ORDER BY SUM(item.amount) DESC";
+		return entityManager.createQuery(jpqlQuery, Object[].class).getResultList();
+	}
+
 	@Override
 	public Order save(Order order) {
 		entityManager.getTransaction().begin();
