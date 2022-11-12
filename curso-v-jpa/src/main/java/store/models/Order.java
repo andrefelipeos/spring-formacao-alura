@@ -24,7 +24,7 @@ public class Order {
 	private Integer identifier;
 
 	@Column(name = "total_value")
-	private BigDecimal totalValue;
+	private BigDecimal totalValue = BigDecimal.ZERO;
 	private LocalDate date = LocalDate.now();
 
 	@ManyToOne
@@ -44,6 +44,7 @@ public class Order {
 	public void addItem(ItemOrder item) {
 		item.setOrder(this);
 		this.items.add(item);
+		this.totalValue = this.totalValue.add(item.getValue());
 	}
 
 	public Integer getIdentifier() {
