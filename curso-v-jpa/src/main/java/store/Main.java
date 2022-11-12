@@ -1,6 +1,7 @@
 package store;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import store.dao.CategoryDao;
 import store.dao.CategoryDaoImpl;
@@ -10,6 +11,7 @@ import store.dao.OrderDao;
 import store.dao.OrderDaoImpl;
 import store.dao.ProductDao;
 import store.dao.ProductDaoImpl;
+import store.dto.SalesReport;
 import store.models.Category;
 import store.models.Customer;
 import store.models.ItemOrder;
@@ -28,16 +30,16 @@ public class Main {
 		ProductDao productDao = new ProductDaoImpl();
 		OrderDao orderDao = new OrderDaoImpl();
 
-		Category book = new Category("BOOK");
-		Category cloth = new Category("CLOTH");
+		Category books = new Category("BOOK");
+		Category clothes = new Category("CLOTH");
 
-		book = categoryDao.save(book);
-		cloth = categoryDao.save(cloth);
+		books = categoryDao.save(books);
+		clothes = categoryDao.save(clothes);
 
-		Product book01 = new Product("Daring Greatly", "by Brené Brown", new BigDecimal(20), book);
-		Product book02 = new Product("The ABC crimes", "by Agatha Christie", new BigDecimal(20), book);
-		Product tshirt01 = new Product("T-shirt I", "green, with a pocket", new BigDecimal(50), cloth);
-		Product tshirt02 = new Product("T-shirt II", "blue, with a nice symbol", new BigDecimal(50), cloth);
+		Product book01 = new Product("Daring Greatly", "by Brené Brown", new BigDecimal(20), books);
+		Product book02 = new Product("The ABC crimes", "by Agatha Christie", new BigDecimal(20), books);
+		Product tshirt01 = new Product("T-shirt I", "green, with a pocket", new BigDecimal(50), clothes);
+		Product tshirt02 = new Product("T-shirt II", "blue, with a nice symbol", new BigDecimal(50), clothes);
 
 		book01 = productDao.save(book01);
 		book02 = productDao.save(book02);
@@ -62,6 +64,14 @@ public class Main {
 
 		order01 = orderDao.save(order01);
 		order02 = orderDao.save(order02);
+
+		System.out.println(((OrderDaoImpl) orderDao).totalSalesValue());
+		List<SalesReport> report = ((OrderDaoImpl) orderDao).salesReport();
+		report.forEach(row -> {
+			System.out.println(row.productsName() + ": " + row.amountSold() + " - " + row.dateOfLastSale());
+		});
+		List<Product> listOfBooks = productDao.findByCategory(books);
+		listOfBooks.forEach(book -> System.out.println(book.getName()));
 	}
 
 }
