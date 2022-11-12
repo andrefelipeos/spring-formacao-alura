@@ -36,8 +36,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> findByCategory(Category category) {
-		String queryJPQL = "SELECT p FROM Product p WHERE p.category.name = :categoryName";
-		return entityManager.createQuery(queryJPQL, Product.class)
+		return entityManager.createNamedQuery("Products.productsByCategory", Product.class)
 				.setParameter("categoryName", category.getName())
 				.getResultList();
 	}
