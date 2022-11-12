@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
+import store.dto.SalesReport;
 import store.models.Order;
 import store.util.JPAUtil;
 
@@ -32,11 +33,11 @@ public class OrderDaoImpl implements OrderDao {
 		return entityManager.find(Order.class, identifier);
 	}
 
-	public List<Object[]> reportOfSales() {
-		String jpqlQuery = "SELECT product.name FROM, SUM(item.amount), MAX(order.date) "
+	public List<SalesReport> salesReport() {
+		String jpqlQuery = "SELECT new store.dto.SalesReport (product.name FROM, SUM(item.amount), MAX(order.date)) "
 				+ "FROM Order order JOIN order.items item JOIN item.product product "
 				+ "GROUP BY product.name ORDER BY SUM(item.amount) DESC";
-		return entityManager.createQuery(jpqlQuery, Object[].class).getResultList();
+		return entityManager.createQuery(jpqlQuery, SalesReport.class).getResultList();
 	}
 
 	@Override
