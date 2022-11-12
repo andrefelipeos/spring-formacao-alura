@@ -1,5 +1,6 @@
 package store.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
@@ -37,6 +38,11 @@ public class OrderDaoImpl implements OrderDao {
 		order = entityManager.merge(order);
 		entityManager.getTransaction().commit();
 		return order;
+	}
+
+	public BigDecimal totalSalesValue() {
+		String jpqlQuery = "SELECT SUM(order.totalValue) FROM Order order";
+		return entityManager.createQuery(jpqlQuery, BigDecimal.class).getSingleResult();
 	}
 
 }
